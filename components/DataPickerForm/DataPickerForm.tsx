@@ -4,20 +4,19 @@ import DatePicker from 'react-datepicker';
 import { Wrapper } from './DataPickerForm.style';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DataPickerForm: React.FC = () => {
+const DataPickerForm = ({setLte, setGte} : {setLte:any, setGte:any}) => {
   const [startDate, setStartDate] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
-  const [x, setX] = useState(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (!startDate) return;
 
     if (endDate) {
-      console.log(startDate);
-      console.log(endDate);
+      setGte(startDate)
+      setLte(endDate)
     } else {
-      console.log(startDate);
+      setGte(startDate)
     }
   };
 
@@ -44,13 +43,6 @@ const DataPickerForm: React.FC = () => {
           isClearable={true}
         />
 
-        {/* <input
-          type="checkbox"
-          checked={x}
-          onChange={() => setX(!x)}
-          style={{ display: 'flex', margin: '10px' }}
-        /> */}
-
         <DatePicker
           selected={endDate}
           onChange={(date) => setEndDate(date)}
@@ -66,7 +58,6 @@ const DataPickerForm: React.FC = () => {
               ],
             },
           ]}
-          // disabled={!x}
           isClearable={true}
         />
 
