@@ -5,12 +5,18 @@ import { Wrapper } from './Layout.style';
 
 const Layout = ({
   spaces,
+  startDateSearch,
+  endDateSearch,
   setStartDateSearch,
   setEndDateSearch,
+  handleDataSeach,
 }: {
   spaces: any;
+  startDateSearch: any;
+  endDateSearch: any;
   setEndDateSearch: any;
   setStartDateSearch: any;
+  handleDataSeach: any;
 }) => {
   console.log(spaces);
   return (
@@ -20,7 +26,13 @@ const Layout = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <DataPickerForm setStartDateSearch={setStartDateSearch} setEndDateSearch={setEndDateSearch} />
+      <DataPickerForm
+        handleDataSeach={handleDataSeach}
+        startDateSearch={startDateSearch}
+        endDateSearch={endDateSearch}
+        setStartDateSearch={setStartDateSearch}
+        setEndDateSearch={setEndDateSearch}
+      />
       <Spaces spaces={spaces} />
     </Wrapper>
   );

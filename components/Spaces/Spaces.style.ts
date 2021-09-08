@@ -61,6 +61,7 @@ export const Wrapper = styled.div`
     flex: 1 1 auto;
     flex-direction: column;
     padding: 1rem;
+    height: 325px;
   }
 
   .card__image {
@@ -87,7 +88,7 @@ export const Wrapper = styled.div`
   }
 
   .card__title {
-    height: 100%;
+    height: 20%;
     max-width: 180px;
     color: #696969;
     font-size: 1.25rem;

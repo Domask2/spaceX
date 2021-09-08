@@ -5,35 +5,31 @@ import { Wrapper } from './DataPickerForm.style';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DataPickerForm = ({
+  startDateSearch,
+  endDateSearch,
   setStartDateSearch,
   setEndDateSearch,
+  handleDataSeach,
 }: {
+  startDateSearch: any;
+  endDateSearch: any;
   setStartDateSearch: any;
   setEndDateSearch: any;
+  handleDataSeach: any;
 }) => {
   const [startDate, setStartDate] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    if (!startDate) return;
-
-    if (endDate) {
-      setStartDateSearch(startDate);
-      setEndDateSearch(endDate);
-    } else {
-      setStartDateSearch(startDate);
-    }
-  };
+  const handleSubmit = (e: any) => {};
 
   return (
     <Wrapper className="picker">
       <p>можете выбрать одну дату или промежуток</p>
-      <form onSubmit={handleSubmit} className="datapicker">
+      <form onSubmit={handleDataSeach} className="datapicker">
         <DatePicker
-          placeholderText={!endDate ? 'выберите дату' : 'выберите дату ОТ'}
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          placeholderText={!endDateSearch ? 'выберите дату' : 'выберите дату ОТ'}
+          selected={startDateSearch}
+          onChange={(date) => setStartDateSearch(date)}
           highlightDates={[
             {
               'react-datepicker__day--highlighted-custom-1': [
@@ -50,8 +46,8 @@ const DataPickerForm = ({
         />
 
         <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
+          selected={endDateSearch}
+          onChange={(date) => setEndDateSearch(date)}
           highlightDates={[
             {
               'react-datepicker__day--highlighted-custom-1': [
