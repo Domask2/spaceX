@@ -4,7 +4,13 @@ import DatePicker from 'react-datepicker';
 import { Wrapper } from './DataPickerForm.style';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DataPickerForm = ({setLte, setGte} : {setLte:any, setGte:any}) => {
+const DataPickerForm = ({
+  setStartDateSearch,
+  setEndDateSearch,
+}: {
+  setStartDateSearch: any;
+  setEndDateSearch: any;
+}) => {
   const [startDate, setStartDate] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
 
@@ -13,15 +19,15 @@ const DataPickerForm = ({setLte, setGte} : {setLte:any, setGte:any}) => {
     if (!startDate) return;
 
     if (endDate) {
-      setGte(startDate)
-      setLte(endDate)
+      setStartDateSearch(startDate);
+      setEndDateSearch(endDate);
     } else {
-      setGte(startDate)
+      setStartDateSearch(startDate);
     }
   };
 
   return (
-    <Wrapper>
+    <Wrapper className="picker">
       <p>можете выбрать одну дату или промежуток</p>
       <form onSubmit={handleSubmit} className="datapicker">
         <DatePicker
@@ -61,7 +67,10 @@ const DataPickerForm = ({setLte, setGte} : {setLte:any, setGte:any}) => {
           isClearable={true}
         />
 
-        <button type="submit">поиск по дате</button>
+        <button className="btn-datapicker" type="submit">
+          поиск по дате
+        </button>
+        <button className="btn-datapicker">очистить фильтр по дате</button>
       </form>
     </Wrapper>
   );

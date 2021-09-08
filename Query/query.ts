@@ -1,4 +1,4 @@
-export const query = (offset:number, gte:string, lte:Date) => {
+export const query = (offset: number, gte: string, lte: Date) => {
   const qr = {
     query: {
       date_utc: {
@@ -9,6 +9,19 @@ export const query = (offset:number, gte:string, lte:Date) => {
     options: {
       limit: 6,
       offset: offset,
+      select: {
+        date_utc: 1,
+        date_local: 1,
+        id: 1,
+        name: 1,
+        success: 1,
+        details: 1,
+        links: {
+          patch: {
+            small: 1,
+          },
+        },
+      },
     },
   };
 

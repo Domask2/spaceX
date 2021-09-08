@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  img {
+  .card__image__img {
     height: auto;
     max-width: 100%;
     vertical-align: middle;
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   .btn {
     background-color: white;
     border: 1px solid #cccccc;
-    //border-radius: 1rem;
+    border-radius: 1rem;
     color: #696969;
     padding: 0.5rem;
     text-transform: lowercase;
@@ -27,27 +27,28 @@ export const Wrapper = styled.div`
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
+    justify-content: center;
   }
 
   .cards__item {
     display: flex;
-    padding: 1rem;
-    @media (min-width: 40rem) {
+    padding: 0.5rem;
+    @media (min-width: 45rem) {
       width: 50%;
     }
-    @media (min-width: 56rem) {
+    @media (min-width: 50rem) {
       width: 33.3333%;
     }
   }
 
   .card {
     background-color: white;
-    border-radius: 0.25rem;
+    border-radius: 0.55rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* height: 70%; */
     &:hover {
       .card__image {
         filter: contrast(100%);
@@ -63,7 +64,6 @@ export const Wrapper = styled.div`
   }
 
   .card__image {
-    /* height: 50%; */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -71,7 +71,6 @@ export const Wrapper = styled.div`
     border-top-right-radius: 0.25rem;
     filter: contrast(70%);
     padding: 1rem;
-    //filter: saturate(180%);
     overflow: hidden;
     position: relative;
     transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
@@ -88,6 +87,8 @@ export const Wrapper = styled.div`
   }
 
   .card__title {
+    height: 100%;
+    max-width: 180px;
     color: #696969;
     font-size: 1.25rem;
     font-weight: 300;
@@ -95,7 +96,12 @@ export const Wrapper = styled.div`
     text-transform: uppercase;
   }
 
+  .card__time {
+    max-width: 180px;
+  }
+
   .card__text {
+    max-width: 180px;
     flex: 1 1 auto;
     font-size: 0.875rem;
     line-height: 1.5;

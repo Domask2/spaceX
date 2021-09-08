@@ -1,11 +1,17 @@
 import Head from 'next/head';
-import { GetStaticProps } from 'next';
 import DataPickerForm from '../DataPickerForm/DataPickerForm';
-import axios from 'axios';
 import Spaces from '../Spaces/Spaces';
 import { Wrapper } from './Layout.style';
 
-const Layout = ({ spaces, setLte, setGte }: { spaces: any; setGte: any; setLte: any }) => {
+const Layout = ({
+  spaces,
+  setStartDateSearch,
+  setEndDateSearch,
+}: {
+  spaces: any;
+  setEndDateSearch: any;
+  setStartDateSearch: any;
+}) => {
   console.log(spaces);
   return (
     <Wrapper>
@@ -14,8 +20,8 @@ const Layout = ({ spaces, setLte, setGte }: { spaces: any; setGte: any; setLte: 
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <DataPickerForm setLte={setLte} setGte={setGte} />
-      <Spaces />
+      <DataPickerForm setStartDateSearch={setStartDateSearch} setEndDateSearch={setEndDateSearch} />
+      <Spaces spaces={spaces} />
     </Wrapper>
   );
 };
