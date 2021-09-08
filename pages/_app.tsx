@@ -2,12 +2,26 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import type { AppProps } from 'next/app';
 
 const GlobalStyle = createGlobalStyle`
-  html,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #f0f0f0;
+  }
+
   body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    color: #999999;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 1rem;
+    text-rendering: optimizeLegibility;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   a {
@@ -15,9 +29,6 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  * {
-    box-sizing: border-box;
-  }
 `;
 
 const theme = {
