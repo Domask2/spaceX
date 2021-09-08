@@ -12,15 +12,12 @@ const Home = ({
   initialTotalDocs: number;
 }) => {
   const [spaces, setProducts] = useState<any>(initialSpaces);
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState<boolean>(false);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
-  console.log(currentOffset);
-  const [startDateSearch, setStartDateSearch] = useState<any>(new Date('2006-01-01'));
-  const [endDateSearch, setEndDateSearch] = useState<any>(new Date());
 
-  const [startDate, setStartDate] = useState<any>(null);
-  const [endDate, setEndDate] = useState<any>(null);
+  const [startDateSearch, setStartDateSearch] = useState<Date>(new Date('2006-01-01'));
+  const [endDateSearch, setEndDateSearch] = useState<Date>(new Date());
 
   const handleDataSeach = (e: any) => {
     e.preventDefault();
@@ -115,7 +112,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await axios.post(
     'https://api.spacexdata.com/v4/launches/query',
-    query(0, '2006-01-01', new Date()),
+    query(0, new Date('2006-01-01'), new Date()),
   );
   const total = await data.totalDocs;
 

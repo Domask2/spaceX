@@ -17,8 +17,6 @@ const DataPickerForm = ({
   setEndDateSearch: any;
   handleDataSeach: any;
 }) => {
-  const handleSubmit = (e: any) => {};
-
   return (
     <Wrapper className="picker">
       <p>можете выбрать одну дату или промежуток</p>
