@@ -17,9 +17,6 @@ const DataPickerForm = ({
   setEndDateSearch: any;
   handleDataSeach: any;
 }) => {
-  const [startDate, setStartDate] = useState<any>(null);
-  const [endDate, setEndDate] = useState<any>(null);
-
   const handleSubmit = (e: any) => {};
 
   return (

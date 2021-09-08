@@ -1,4 +1,4 @@
-export const query = (offset: number, gte: string, lte: Date) => {
+export const query = (offset: number, gte: Date, lte: Date) => {
   const qr = {
     query: {
       date_utc: {

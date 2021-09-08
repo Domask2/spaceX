@@ -15,9 +15,12 @@ const Home = ({
   const [fetching, setFetching] = useState(false);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
-
+  console.log(currentOffset);
   const [startDateSearch, setStartDateSearch] = useState<any>(new Date('2006-01-01'));
   const [endDateSearch, setEndDateSearch] = useState<any>(new Date());
+
+  const [startDate, setStartDate] = useState<any>(null);
+  const [endDate, setEndDate] = useState<any>(null);
 
   const handleDataSeach = (e: any) => {
     e.preventDefault();
@@ -39,11 +42,25 @@ const Home = ({
         .then(async (res: any) => {
           const data = await res.data;
           setProducts(data.docs);
+          setCurrentOffset((prevState) => prevState + 6);
         })
         .catch((err) => console.log(err));
     } else {
       setStartDateSearch(startDateSearch);
-      setEndDateSearch(startDateSearch);
+
+      setCurrentOffset(0);
+      setFetching(false);
+
+      axios
+        .post(
+          'https://api.spacexdata.com/v4/launches/query',
+          query(0, startDateSearch, new Date(new Date(startDateSearch).getTime() + 86400000 * 2)),
+        )
+        .then(async (res: any) => {
+          const data = await res.data;
+          setProducts(data.docs);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
