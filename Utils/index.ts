@@ -26,3 +26,25 @@ export const useAxiosDataSuccess = () => {
 
   return [daysSuccess, daysUnSuccess];
 };
+
+export const toLocalDateTime = (utc: string) => {
+  const date = new Date(utc).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+
+  return date;
+};
+
+export const toLocalDate = (utc: Date | any) => {
+  const date = new Date(utc).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  return date;
+};

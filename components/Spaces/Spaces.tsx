@@ -1,5 +1,6 @@
 import { Wrapper } from './Spaces.style';
 import Image from 'next/image';
+import { toLocalDateTime } from './../../Utils/index';
 
 type ISpaces = {
   data_local: Date;
@@ -33,9 +34,9 @@ const Spaces = ({ spaces }: { spaces: [ISpaces] | null }) => {
                   </div>
                   <div className="card__content">
                     <div className="card__title">{space.name}</div>
-                    <div className="card__time">{space.date_utc}</div>
+                    <div className="card__time">{toLocalDateTime(space.date_utc)}</div>
                     <p className="card__success">
-                      Статус:{' '}
+                      Status:{' '}
                       {space.success ? (
                         <span style={{ color: 'green' }}>Success</span>
                       ) : (
