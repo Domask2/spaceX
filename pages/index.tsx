@@ -26,8 +26,8 @@ const Home = ({
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
 
-  const [startDateSearch, setStartDateSearch] = useState<Date>(new Date('2006-01-01'));
-  const [endDateSearch, setEndDateSearch] = useState<Date>(new Date());
+  const [startDateSearch, setStartDateSearch] = useState<Date | any>(new Date('2006-01-01'));
+  const [endDateSearch, setEndDateSearch] = useState<Date | any>(new Date());
 
   const remoteState = () => {
     setProducts(null);
