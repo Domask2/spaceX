@@ -3,22 +3,33 @@ import DataPickerForm from '../DataPickerForm/DataPickerForm';
 import Spaces from '../Spaces/Spaces';
 import { Wrapper } from './Layout.style';
 
-const Layout = ({
+type ISpaces = {
+  data_local: Date;
+  data_utc: Date;
+  details: string;
+  id: string;
+  links: Array<any>;
+  name: string;
+  success: boolean;
+};
+
+type Props = {
+  spaces: [ISpaces] | null;
+  startDateSearch: Date;
+  endDateSearch: Date;
+  setEndDateSearch: any;
+  setStartDateSearch: any;
+  handleDataSeach: (e: any) => void;
+};
+
+const Layout: React.FC<Props> = ({
   spaces,
   startDateSearch,
   endDateSearch,
   setStartDateSearch,
   setEndDateSearch,
   handleDataSeach,
-}: {
-  spaces: any;
-  startDateSearch: any;
-  endDateSearch: any;
-  setEndDateSearch: any;
-  setStartDateSearch: any;
-  handleDataSeach: any;
 }) => {
-  console.log(spaces);
   return (
     <Wrapper>
       <Head>
@@ -33,6 +44,7 @@ const Layout = ({
         setStartDateSearch={setStartDateSearch}
         setEndDateSearch={setEndDateSearch}
       />
+
       <Spaces spaces={spaces} />
     </Wrapper>
   );

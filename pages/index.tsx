@@ -4,14 +4,24 @@ import axios from 'axios';
 import Layout from '../components/Layout/Layout';
 import { query } from '../Query/query';
 
+type ISpaces = {
+  data_local: Date;
+  data_utc: Date;
+  details: string;
+  id: string;
+  links: Array<any>;
+  name: string;
+  success: boolean;
+};
+
 const Home = ({
   initialSpaces,
   initialTotalDocs,
 }: {
-  initialSpaces: any;
+  initialSpaces: [ISpaces] | null;
   initialTotalDocs: number;
 }) => {
-  const [spaces, setProducts] = useState<any>(initialSpaces);
+  const [spaces, setProducts] = useState<[ISpaces] | null | any>(initialSpaces);
   const [fetching, setFetching] = useState<boolean>(false);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
@@ -19,17 +29,21 @@ const Home = ({
   const [startDateSearch, setStartDateSearch] = useState<Date>(new Date('2006-01-01'));
   const [endDateSearch, setEndDateSearch] = useState<Date>(new Date());
 
+  const remoteState = () => {
+    setProducts(null);
+    setCurrentOffset(0);
+    setFetching(false);
+  };
+
   const handleDataSeach = (e: any) => {
     e.preventDefault();
-    setProducts(null);
+    remoteState();
 
     if (!startDateSearch) return;
 
     if (endDateSearch) {
       setStartDateSearch(startDateSearch);
       setEndDateSearch(endDateSearch);
-      setCurrentOffset(0);
-      setFetching(false);
 
       axios
         .post(
@@ -45,13 +59,10 @@ const Home = ({
     } else {
       setStartDateSearch(startDateSearch);
 
-      setCurrentOffset(0);
-      setFetching(false);
-
       axios
         .post(
           'https://api.spacexdata.com/v4/launches/query',
-          query(0, startDateSearch, new Date(new Date(startDateSearch).getTime() + 86400000 * 2)),
+          query(0, startDateSearch, startDateSearch),
         )
         .then(async (res: any) => {
           const data = await res.data;

@@ -1,7 +1,17 @@
 import { Wrapper } from './Spaces.style';
 import Image from 'next/image';
 
-const Spaces = ({ spaces }: { spaces: any }) => {
+type ISpaces = {
+  data_local: Date;
+  data_utc: Date;
+  details: string;
+  id: string;
+  links: Array<any>;
+  name: string;
+  success: boolean;
+};
+
+const Spaces = ({ spaces }: { spaces: [ISpaces] | null }) => {
   return (
     <Wrapper className="spaces">
       <div className="cards">
@@ -35,7 +45,6 @@ const Spaces = ({ spaces }: { spaces: any }) => {
                     <p className="card__text">
                       {space.details || 'Flight details are missing, but you hold on'}{' '}
                     </p>
-                    {/* <button className="btn btn--block card__btn">...more details</button> */}
                   </div>
                 </div>
               </div>

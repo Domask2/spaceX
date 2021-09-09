@@ -27,3 +27,19 @@ export const query = (offset: number, gte: Date, lte: Date) => {
 
   return qr;
 };
+
+export const queryDaty = () => {
+  const qr = {
+    options: {
+      limit: 200,
+      select: {
+        date_utc: 1,
+        date_local: 1,
+        success: 1,
+        date_unix: 1,
+      },
+    },
+  };
+
+  return qr;
+};
