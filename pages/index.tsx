@@ -107,7 +107,7 @@ const Home = ({
         .catch((err) => console.log(err))
         .finally(() => setFetching(false));
     }
-  }, [fetching]);
+  }, [fetching, currentOffset, endDateSearch, spaces, startDateSearch]);
 
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
