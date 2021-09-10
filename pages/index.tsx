@@ -90,7 +90,8 @@ const Home = ({
     router.push({
       query: { dateStart: "01-01-2006", dateEnd: toDateFormat(new Date()) },
     });
-  }, [router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (fetching) {
@@ -107,7 +108,8 @@ const Home = ({
         .catch((err) => console.log(err))
         .finally(() => setFetching(false));
     }
-  }, [fetching, currentOffset, endDateSearch, spaces, startDateSearch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetching]);
 
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
