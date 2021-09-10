@@ -37,6 +37,7 @@ const DataPickerForm: React.FC<Props> = ({
           selected={startDateSearch}
           onChange={(date) => setStartDateSearch(date)}
           maxDate={new Date()}
+          dateFormat="dd.MM.yyyy"
           highlightDates={[
             {
               'react-datepicker__day--highlighted-custom-1': [...daysUnSuccess],
@@ -52,6 +53,7 @@ const DataPickerForm: React.FC<Props> = ({
           selected={endDateSearch}
           onChange={(date) => setEndDateSearch(date)}
           maxDate={new Date()}
+          dateFormat="dd.MM.yyyy"
           highlightDates={[
             {
               'react-datepicker__day--highlighted-custom-1': [...daysUnSuccess],

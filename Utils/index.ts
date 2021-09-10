@@ -48,3 +48,15 @@ export const toLocalDate = (utc: Date | any) => {
 
   return date;
 };
+
+export const toDateFormat = (utc: any) => {
+  let dd = utc.getDate();
+  if (dd < 10) dd = '0' + dd;
+
+  let mm = utc.getMonth() + 1;
+  if (mm < 10) mm = '0' + mm;
+
+  let yy = utc.getFullYear();
+
+  return dd + '-' + mm + '-' + yy;
+};

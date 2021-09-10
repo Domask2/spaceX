@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Layout from '../components/Layout/Layout';
 import { query } from '../Query/query';
-import { toLocalDate } from './../Utils/index';
+import { toLocalDate, toDateFormat } from './../Utils/index';
 
 type ISpaces = {
   data_local: Date;
@@ -31,7 +31,7 @@ const Home = ({
   const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
   const [error, setError] = useState<string>('');
 
-  const [startDateSearch, setStartDateSearch] = useState<Date | any>(new Date('2006-01-01'));
+  const [startDateSearch, setStartDateSearch] = useState<Date | any>(new Date('01-01-2006'));
   const [endDateSearch, setEndDateSearch] = useState<Date | any>(new Date());
 
   const remoteState = () => {
@@ -54,9 +54,9 @@ const Home = ({
 
   const resetSeactDate = () => {
     remoteState();
-    setStartDateSearch(new Date('2006-01-01'));
+    setStartDateSearch(new Date('01-01-2006'));
     setEndDateSearch(new Date());
-    axiosGetData(new Date('2006-01-01'), new Date());
+    axiosGetData(new Date('01-01-2006'), new Date());
   };
 
   const handleDataSeach = (e: any) => {
@@ -72,14 +72,14 @@ const Home = ({
 
       router.push({
         query: {
-          dateStart: new Date(startDateSearch).toDateString(),
-          dateEnd: new Date(endDateSearch).toDateString(),
+          dateStart: toDateFormat(startDateSearch),
+          dateEnd: toDateFormat(endDateSearch),
         },
       });
     } else {
       setStartDateSearch(startDateSearch);
 
-      router.push({ query: { date: new Date(startDateSearch).toDateString() } });
+      router.push({ query: { date: toDateFormat(startDateSearch) } });
 
       axiosGetData(
         new Date(new Date(startDateSearch).getTime() - 86400000),
@@ -89,7 +89,7 @@ const Home = ({
   };
 
   useEffect(() => {
-    router.push({ query: { dateStart: '2006-01-01', dateEnd: toLocalDate(new Date()) } });
+    router.push({ query: { dateStart: '01-01-2006', dateEnd: toDateFormat(new Date()) } });
   }, []);
 
   useEffect(() => {
@@ -145,7 +145,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await axios.post(
     'https://api.spacexdata.com/v4/launches/query',
-    query(0, new Date('2006-01-01'), new Date()),
+    query(0, new Date('01-01-2006'), new Date()),
   );
   const total = await data.totalDocs;
 
