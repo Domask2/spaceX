@@ -11,46 +11,32 @@ type Props = {
   endDateSearch: Date;
   setEndDateSearch: any;
   setStartDateSearch: any;
+  error: string;
   handleDataSeach: (e: any) => void;
+  resetSeactDate: (e: any) => void;
 };
 
 const DataPickerForm: React.FC<Props> = ({
+  error,
   startDateSearch,
   endDateSearch,
   setStartDateSearch,
   setEndDateSearch,
   handleDataSeach,
+  resetSeactDate,
 }) => {
   const [daysSuccess, daysUnSuccess] = useAxiosDataSuccess();
 
-  // const [daysUnSuccess, setDaysUnSuccess] = useState<Array<Date>>([]);
-  // const [daysSuccess, setDaysSuccess] = useState<Array<Date>>([]);
-  // useEffect(() => {
-  //   axios
-  //     .post('https://api.spacexdata.com/v4/launches/query', queryDaty())
-  //     .then(async (res: any) => {
-  //       const data = await res.data.docs;
-  //       const arrSucsess: Array<Date> = [];
-  //       const arrUnSucsess: Array<Date> = [];
-  //       data.map((suc: any) => {
-  //         suc.success === true
-  //           ? arrSucsess.push(new Date(suc.date_local))
-  //           : arrUnSucsess.push(new Date(suc.date_local));
-  //         setDaysSuccess(arrSucsess);
-  //         setDaysUnSuccess(arrUnSucsess);
-  //       });
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   return (
     <Wrapper className="picker">
-      <p>можете выбрать одну дату или промежуток</p>
+      <p>Вы можете выбрать одну дату в левом окошке или указать необходимый диапозон.</p>
+      {error}
       <form onSubmit={handleDataSeach} className="datapicker">
         <DatePicker
           placeholderText={!endDateSearch ? 'выберите дату' : 'выберите дату ОТ'}
           selected={startDateSearch}
           onChange={(date) => setStartDateSearch(date)}
+          maxDate={new Date()}
           highlightDates={[
             {
               'react-datepicker__day--highlighted-custom-1': [...daysUnSuccess],
@@ -65,6 +51,7 @@ const DataPickerForm: React.FC<Props> = ({
         <DatePicker
           selected={endDateSearch}
           onChange={(date) => setEndDateSearch(date)}
+          maxDate={new Date()}
           highlightDates={[
             {
               'react-datepicker__day--highlighted-custom-1': [...daysUnSuccess],
@@ -76,10 +63,12 @@ const DataPickerForm: React.FC<Props> = ({
           isClearable={true}
         />
 
-        <button className="btn-datapicker" type="submit">
+        <button className="btn-datapicker" type="submit" disabled={!startDateSearch}>
           поиск по дате
         </button>
-        <button className="btn-datapicker">очистить фильтр по дате</button>
+        <button className="btn-datapicker" onClick={resetSeactDate}>
+          очистить фильтр по дате
+        </button>
       </form>
     </Wrapper>
   );

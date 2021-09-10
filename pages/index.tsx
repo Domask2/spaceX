@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import Layout from '../components/Layout/Layout';
 import { query } from '../Query/query';
+import { toLocalDate } from './../Utils/index';
 
 type ISpaces = {
   data_local: Date;
@@ -21,10 +23,13 @@ const Home = ({
   initialSpaces: [ISpaces] | null;
   initialTotalDocs: number;
 }) => {
+  const router = useRouter();
+
   const [spaces, setProducts] = useState<[ISpaces] | null | any>(initialSpaces);
   const [fetching, setFetching] = useState<boolean>(false);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
+  const [error, setError] = useState<string>('');
 
   const [startDateSearch, setStartDateSearch] = useState<Date | any>(new Date('2006-01-01'));
   const [endDateSearch, setEndDateSearch] = useState<Date | any>(new Date());
@@ -33,44 +38,59 @@ const Home = ({
     setProducts(null);
     setCurrentOffset(0);
     setFetching(false);
+    setError('');
+  };
+
+  const axiosGetData = (start: Date, end: Date) => {
+    axios
+      .post('https://api.spacexdata.com/v4/launches/query', query(0, start, end))
+      .then(async (res: any) => {
+        const data = await res.data;
+        setProducts(data.docs);
+        setCurrentOffset((prevState) => prevState + 6);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const resetSeactDate = () => {
+    remoteState();
+    setStartDateSearch(new Date('2006-01-01'));
+    setEndDateSearch(new Date());
+    axiosGetData(new Date('2006-01-01'), new Date());
   };
 
   const handleDataSeach = (e: any) => {
     e.preventDefault();
-    remoteState();
-
     if (!startDateSearch) return;
+    remoteState();
 
     if (endDateSearch) {
       setStartDateSearch(startDateSearch);
       setEndDateSearch(endDateSearch);
 
-      axios
-        .post(
-          'https://api.spacexdata.com/v4/launches/query',
-          query(0, startDateSearch, endDateSearch),
-        )
-        .then(async (res: any) => {
-          const data = await res.data;
-          setProducts(data.docs);
-          setCurrentOffset((prevState) => prevState + 6);
-        })
-        .catch((err) => console.log(err));
+      axiosGetData(startDateSearch, endDateSearch);
+
+      router.push({
+        query: {
+          dateStart: new Date(startDateSearch).toDateString(),
+          dateEnd: new Date(endDateSearch).toDateString(),
+        },
+      });
     } else {
       setStartDateSearch(startDateSearch);
 
-      axios
-        .post(
-          'https://api.spacexdata.com/v4/launches/query',
-          query(0, startDateSearch, startDateSearch),
-        )
-        .then(async (res: any) => {
-          const data = await res.data;
-          setProducts(data.docs);
-        })
-        .catch((err) => console.log(err));
+      router.push({ query: { date: new Date(startDateSearch).toDateString() } });
+
+      axiosGetData(
+        new Date(new Date(startDateSearch).getTime() - 86400000),
+        new Date(new Date(startDateSearch).getTime() + 86400000),
+      );
     }
   };
+
+  useEffect(() => {
+    router.push({ query: { dateStart: '2006-01-01', dateEnd: toLocalDate(new Date()) } });
+  }, []);
 
   useEffect(() => {
     if (fetching) {
@@ -81,8 +101,8 @@ const Home = ({
         )
         .then(async (res: any) => {
           const data = await res.data;
-          setCurrentOffset((prevState) => prevState + 6);
           setProducts([...spaces, ...data.docs]);
+          setCurrentOffset((prevState) => prevState + 6);
         })
         .catch((err) => console.log(err))
         .finally(() => setFetching(false));
@@ -108,7 +128,9 @@ const Home = ({
     <div>
       <Layout
         handleDataSeach={handleDataSeach}
+        resetSeactDate={resetSeactDate}
         spaces={spaces}
+        error={error}
         startDateSearch={startDateSearch}
         endDateSearch={endDateSearch}
         setStartDateSearch={setStartDateSearch}

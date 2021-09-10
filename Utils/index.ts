@@ -15,8 +15,8 @@ export const useAxiosDataSuccess = () => {
         const data = await res.data.docs;
         data.map((suc: any) => {
           suc.success === true
-            ? arrSucsess.push(new Date(suc.date_utc))
-            : arrUnSucsess.push(new Date(suc.date_utc));
+            ? arrSucsess.push(new Date(new Date(suc.date_utc).toDateString()))
+            : arrUnSucsess.push(new Date(new Date(suc.date_utc).toDateString()));
         });
         setDaysSuccess(arrSucsess);
         setDaysUnSuccess(arrUnSucsess);

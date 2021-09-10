@@ -19,16 +19,20 @@ type Props = {
   endDateSearch: Date;
   setEndDateSearch: any;
   setStartDateSearch: any;
+  error: string;
   handleDataSeach: (e: any) => void;
+  resetSeactDate: (e: any) => void;
 };
 
 const Layout: React.FC<Props> = ({
   spaces,
+  error,
   startDateSearch,
   endDateSearch,
   setStartDateSearch,
   setEndDateSearch,
   handleDataSeach,
+  resetSeactDate,
 }) => {
   return (
     <Wrapper>
@@ -38,7 +42,9 @@ const Layout: React.FC<Props> = ({
       </Head>
 
       <DataPickerForm
+        error={error}
         handleDataSeach={handleDataSeach}
+        resetSeactDate={resetSeactDate}
         startDateSearch={startDateSearch}
         endDateSearch={endDateSearch}
         setStartDateSearch={setStartDateSearch}
