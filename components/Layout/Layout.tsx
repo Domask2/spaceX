@@ -2,31 +2,10 @@ import Head from 'next/head';
 import DataPickerForm from '../DataPickerForm/DataPickerForm';
 import Spaces from '../Spaces/Spaces';
 import { Wrapper } from './Layout.style';
+import { PropsLayout } from '../../type/index';
 
-type ISpaces = {
-  data_local: Date;
-  data_utc: Date;
-  details: string;
-  id: string;
-  links: Array<any>;
-  name: string;
-  success: boolean;
-};
-
-type Props = {
-  spaces: [ISpaces] | null;
-  startDateSearch: Date;
-  endDateSearch: Date;
-  setEndDateSearch: any;
-  setStartDateSearch: any;
-  error: string;
-  handleDataSeach: (e: any) => void;
-  resetSeactDate: (e: any) => void;
-};
-
-const Layout: React.FC<Props> = ({
+const Layout: React.FC<PropsLayout> = ({
   spaces,
-  error,
   startDateSearch,
   endDateSearch,
   setStartDateSearch,
@@ -42,7 +21,6 @@ const Layout: React.FC<Props> = ({
       </Head>
 
       <DataPickerForm
-        error={error}
         handleDataSeach={handleDataSeach}
         resetSeactDate={resetSeactDate}
         startDateSearch={startDateSearch}

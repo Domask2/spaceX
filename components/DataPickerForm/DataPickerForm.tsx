@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import { Wrapper } from './DataPickerForm.style';
 import 'react-datepicker/dist/react-datepicker.css';
-// import { queryDaty } from '../../Query/query';
 import { useAxiosDataSuccess } from '../../Utils';
+import { PropsDataPicker } from '../../type';
 
-type Props = {
-  startDateSearch: Date;
-  endDateSearch: Date;
-  setEndDateSearch: any;
-  setStartDateSearch: any;
-  error: string;
-  handleDataSeach: (e: any) => void;
-  resetSeactDate: (e: any) => void;
-};
 
-const DataPickerForm: React.FC<Props> = ({
-  error,
+const DataPickerForm: React.FC<PropsDataPicker> = ({
   startDateSearch,
   endDateSearch,
   setStartDateSearch,
@@ -30,7 +19,6 @@ const DataPickerForm: React.FC<Props> = ({
   return (
     <Wrapper className="picker">
       <p>Вы можете выбрать одну дату в левом окошке или указать необходимый диапозон.</p>
-      {error}
       <form onSubmit={handleDataSeach} className="datapicker">
         <DatePicker
           placeholderText={!endDateSearch ? 'выберите дату' : 'выберите дату ОТ'}

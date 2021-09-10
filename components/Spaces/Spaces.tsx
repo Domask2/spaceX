@@ -1,23 +1,15 @@
-import { Wrapper } from './Spaces.style';
+import React from 'react';
 import Image from 'next/image';
+import { Wrapper } from './Spaces.style';
 import { toLocalDateTime } from './../../Utils/index';
+import { PropsSpaces, ISpaces } from '../../type/index';
 
-type ISpaces = {
-  data_local: Date;
-  data_utc: Date;
-  details: string;
-  id: string;
-  links: Array<any>;
-  name: string;
-  success: boolean;
-};
-
-const Spaces = ({ spaces }: { spaces: [ISpaces] | null }) => {
+const Spaces: React.FC<PropsSpaces> = ({ spaces }) => {
   return (
     <Wrapper className="spaces">
       <div className="cards">
         {spaces &&
-          spaces.map((space: any, index: number) => {
+          spaces.map((space: ISpaces, index: number) => {
             return (
               <div className="cards__item" key={index}>
                 <div className="card">

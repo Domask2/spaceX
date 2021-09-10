@@ -28,7 +28,7 @@ export const query = (offset: number, gte: Date | string, lte: Date) => {
   return qr;
 };
 
-export const queryDaty = () => {
+export const queryDate = () => {
   const qr = {
     options: {
       limit: 200,
