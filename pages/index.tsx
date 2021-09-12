@@ -90,7 +90,6 @@ const Home = ({
     router.push({
       query: { dateStart: "01-01-2006", dateEnd: toDateFormat(new Date()) },
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -108,7 +107,6 @@ const Home = ({
         .catch((err) => console.log(err))
         .finally(() => setFetching(false));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetching]);
 
   useEffect(() => {

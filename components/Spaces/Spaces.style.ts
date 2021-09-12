@@ -75,16 +75,25 @@ export const Wrapper = styled.div`
     overflow: hidden;
     position: relative;
     transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
-    /* &::before {
-      content: '';
-      display: block;
-      padding-top: 56.25%; // 16:9 aspect ratio
-    }
-    @media (min-width: 40rem) {
-      &::before {
-        padding-top: 66.6%; // 3:2 aspect ratio
-      }
-    } */
+  }
+
+  .opacity-0 {
+    opacity: 100;
+  }
+  
+  .opacity-100 {
+    opacity: 0;
+  }
+
+  .card__image__img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-image: url('/spinner.svg');
   }
 
   .card__title {

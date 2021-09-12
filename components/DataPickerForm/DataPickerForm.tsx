@@ -21,6 +21,7 @@ const DataPickerForm: React.FC<PropsDataPicker> = ({
       <p>Вы можете выбрать одну дату в левом окошке или указать необходимый диапозон.</p>
       <form onSubmit={handleDataSeach} className="datapicker">
         <DatePicker
+          className="datapicker-input"
           placeholderText={!endDateSearch ? 'выберите дату' : 'выберите дату ОТ'}
           selected={startDateSearch}
           onChange={(date) => setStartDateSearch(date)}
@@ -38,6 +39,7 @@ const DataPickerForm: React.FC<PropsDataPicker> = ({
         />
 
         <DatePicker
+          className="datapicker-input"  
           selected={endDateSearch}
           onChange={(date) => setEndDateSearch(date)}
           maxDate={new Date()}

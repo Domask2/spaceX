@@ -1,5 +1,5 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import type { AppProps } from 'next/app';
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import type { AppProps } from "next/app";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -29,11 +29,17 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  .datapicker-input {
+    border: 1px solid lightgray; 
+    padding: 10px 10px; 
+    border-bottom: 1px solid #ccc;
+  }
+
 `;
 
 const theme = {
   colors: {
-    primary: '#0070f3',
+    primary: "#0070f3",
   },
 };
 

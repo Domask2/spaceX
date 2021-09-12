@@ -3,7 +3,7 @@ export interface ISpacesDocs {
   totalDocs?: number;
 }
 
-export type ISpaces = {
+export interface ISpaces {
   data_local: Date;
   date_utc: string;
   details: string;
@@ -12,14 +12,14 @@ export type ISpaces = {
   name: string;
   success: boolean;
 };
-type links = {
+interface links {
   patch: small;
 };
-type small = {
+interface small  {
   small: string;
 };
 
-export type PropsLayout = {
+export interface PropsLayout {
   spaces: [ISpaces] | null;
   startDateSearch: Date;
   endDateSearch: Date;
@@ -29,11 +29,11 @@ export type PropsLayout = {
   resetSeactDate: (e: any) => void;
 };
 
-export type PropsSpaces = {
+export interface PropsSpaces {
   spaces: [ISpaces] | null;
 };
 
-export type PropsDataPicker = {
+export interface PropsDataPicker {
   startDateSearch: Date;
   endDateSearch: Date;
   setEndDateSearch: any;
