@@ -1,9 +1,8 @@
 ## Тестовое задание: необходимо сделать интерфейс который будет показывать список всех запусков Space X
 
+https://space-x-drab.vercel.app/
 
-## Getting Started
-
-First, run the development server:
+## Инчтрукция для запуска
 
 ```bash
 git clone https://github.com/Domask2/spaceX.git
