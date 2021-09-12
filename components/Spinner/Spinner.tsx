@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "./Spinner.style";
+import { Wrapper } from "./Spannet.style";
 
 const Spinner = () => {
   return (
