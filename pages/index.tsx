@@ -8,6 +8,8 @@ import { query } from "../Query/query";
 import { toDateFormat } from "./../Utils/index";
 import { ISpaces, ISpacesDocs } from "../type";
 
+import Spinner from "../components/Spinner/Spinner";
+
 const Home = ({
   initialSpaces,
   initialTotalDocs,
@@ -18,8 +20,8 @@ const Home = ({
   const router = useRouter();
   const [spaces, setProducts] = useState<[ISpaces] | null | any>(initialSpaces);
   const [fetching, setFetching] = useState<boolean>(false);
-  const [currentOffset, setCurrentOffset] = useState<number>(0);
-  const [totalDocs, setTotalDocs] = useState<number>(initialTotalDocs);
+  const [currentOffset, setCurrentOffset] = useState<number>(6);
+  const [totalDocs, setTotalDocs] = useState<number | any>(initialTotalDocs);
 
   const [startDateSearch, setStartDateSearch] = useState<Date>(
     new Date("01-01-2006")
@@ -42,6 +44,7 @@ const Home = ({
         const data = await res.data;
         setProducts(data.docs);
         setCurrentOffset((prevState) => prevState + 6);
+        setTotalDocs(data?.totalDocs)
       })
       .catch((err) => console.log(err));
   };
@@ -94,7 +97,6 @@ const Home = ({
 
   useEffect(() => {
     if (fetching) {
-      setCurrentOffset((prevState) => prevState + 6);
       axios
         .post<ISpacesDocs>(
           "https://api.spacexdata.com/v4/launches/query",
@@ -102,7 +104,9 @@ const Home = ({
         )
         .then(async (res: any) => {
           const data = await res.data;
+          setTotalDocs(data.totalDocs)
           setProducts([...spaces, ...data.docs]);
+          setCurrentOffset((prevState) => prevState + 6);
         })
         .catch((err) => console.log(err))
         .finally(() => setFetching(false));
@@ -115,27 +119,31 @@ const Home = ({
   }, [spaces]);
 
   const scrollHandler = (e: any) => {
+
     if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-      2
-    ) {
+      (e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) < 50) && 
+          spaces.length < totalDocs)
+     {
       setFetching(true);
     }
   };
-
+  console.log(totalDocs);
   return (
     <div>
       <Layout
         spaces={spaces}
         handleDataSeach={handleDataSeach}
         resetSeactDate={resetSeactDate}
-        
         startDateSearch={startDateSearch}
         endDateSearch={endDateSearch}
         setStartDateSearch={setStartDateSearch}
         setEndDateSearch={setEndDateSearch}
       />
+
+      {fetching && <div><Spinner/><div></div></div> }
+      {spaces?.length === totalDocs &&
+      <h3 className="page-end">Данные по запускам SpaceX больше нет</h3>}
     </div>
   );
 };

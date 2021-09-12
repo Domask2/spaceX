@@ -19,7 +19,6 @@ const Layout: React.FC<PropsLayout> = ({
         <title>Space-X</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <DataPickerForm
         handleDataSeach={handleDataSeach}
         resetSeactDate={resetSeactDate}
@@ -28,8 +27,8 @@ const Layout: React.FC<PropsLayout> = ({
         setStartDateSearch={setStartDateSearch}
         setEndDateSearch={setEndDateSearch}
       />
-
       <Spaces spaces={spaces} />
+
     </Wrapper>
   );
 };

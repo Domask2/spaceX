@@ -35,6 +35,10 @@ const GlobalStyle = createGlobalStyle`
     border-bottom: 1px solid #ccc;
   }
 
+  .page-end {
+    text-align: center;
+  }
+
 `;
 
 const theme = {
