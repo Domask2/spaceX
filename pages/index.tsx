@@ -94,6 +94,7 @@ const Home = ({
 
   useEffect(() => {
     if (fetching) {
+      setCurrentOffset((prevState) => prevState + 6);
       axios
         .post<ISpacesDocs>(
           "https://api.spacexdata.com/v4/launches/query",
@@ -102,7 +103,6 @@ const Home = ({
         .then(async (res: any) => {
           const data = await res.data;
           setProducts([...spaces, ...data.docs]);
-          setCurrentOffset((prevState) => prevState + 6);
         })
         .catch((err) => console.log(err))
         .finally(() => setFetching(false));

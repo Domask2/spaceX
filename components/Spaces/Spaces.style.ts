@@ -77,25 +77,6 @@ export const Wrapper = styled.div`
     transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
   }
 
-  .opacity-0 {
-    opacity: 100;
-  }
-  
-  .opacity-100 {
-    opacity: 0;
-  }
-
-  .card__image__img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    background-image: url('/spinner.svg');
-  }
-
   .card__title {
     height: 20%;
     max-width: 180px;

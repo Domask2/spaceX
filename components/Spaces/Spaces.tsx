@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Wrapper } from './Spaces.style';
 import { toLocalDateTime } from './../../Utils/index';
 import { PropsSpaces, ISpaces } from '../../type/index';
-import clsx from 'clsx';
 
 const Spaces: React.FC<PropsSpaces> = ({ spaces }, onLoad:any ) => {
   const [isReady, setIsReady] = useState<boolean>(false);
@@ -22,7 +21,6 @@ const Spaces: React.FC<PropsSpaces> = ({ spaces }, onLoad:any ) => {
               <div className="cards__item" key={index}>
                 <div className="card">
                   <div className="card__image">
-                    <div className={clsx(['opacity-0', {'opacity-100': isReady}, 'card__image__img'])}></div>
                       <Image
                         onLoad={onLoadCallback}
                         src={space.links.patch.small ? space.links.patch.small : '/img/404.png'}
