@@ -2,7 +2,7 @@
 
 https://space-x-drab.vercel.app/
 
-## Инчтрукция для запуска
+## Инструкция для запуска
 
 ```bash
 git clone https://github.com/Domask2/spaceX.git
