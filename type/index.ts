@@ -2,7 +2,6 @@ export interface ISpacesDocs {
   docs: ISpaces;
   totalDocs?: number;
 }
-
 export interface ISpaces {
   data_local: Date;
   date_utc: string;
@@ -21,6 +20,8 @@ interface small  {
 
 export interface PropsLayout {
   spaces: [ISpaces] | null;
+  fetching: boolean;
+  totalDocs: number | undefined;
   startDateSearch: Date;
   endDateSearch: Date;
   setEndDateSearch: any;

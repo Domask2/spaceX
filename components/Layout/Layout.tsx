@@ -1,12 +1,15 @@
-import Head from 'next/head';
-import DataPickerForm from '../DataPickerForm/DataPickerForm';
-import Spaces from '../Spaces/Spaces';
-import { Wrapper } from './Layout.style';
-import { PropsLayout } from '../../type/index';
-
+import Head from "next/head";
+import DataPickerForm from "../DataPickerForm/DataPickerForm";
+import { TinyButton as ScrollUpButton } from "react-scroll-up-button";
+import Spaces from "../Spaces/Spaces";
+import { Wrapper } from "./Layout.style";
+import { PropsLayout } from "../../type/index";
+import Spinner from "../Spinner/Spinner";
 const Layout: React.FC<PropsLayout> = ({
   spaces,
+  fetching,
   startDateSearch,
+  totalDocs,
   endDateSearch,
   setStartDateSearch,
   setEndDateSearch,
@@ -28,7 +31,13 @@ const Layout: React.FC<PropsLayout> = ({
         setEndDateSearch={setEndDateSearch}
       />
       <Spaces spaces={spaces} />
-
+      <ScrollUpButton ShowAtPosition={100} />
+      <div className="fetching">
+        {fetching && <Spinner />}
+        {spaces?.length === totalDocs && (
+          <h3 className="page-end">Данные по запускам SpaceX больше нет</h3>
+        )}
+      </div>
     </Wrapper>
   );
 };

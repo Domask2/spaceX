@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import DynamicFont from 'react-dynamic-font';
 import { Wrapper } from './Spaces.style';
 import { toLocalDateTime } from './../../Utils/index';
 import { PropsSpaces, ISpaces } from '../../type/index';
@@ -31,7 +32,9 @@ const Spaces: React.FC<PropsSpaces> = ({ spaces }, onLoad:any ) => {
                     
                   </div>
                   <div className="card__content">
-                    <div className="card__title">{space.name}</div>
+                    <div className="card__title">
+                    <DynamicFont content={space.name} />
+                    </div>
                     <div className="card__time">{toLocalDateTime(space.date_utc)}</div>
                     <p className="card__success">
                       Status:{' '}

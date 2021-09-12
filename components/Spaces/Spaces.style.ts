@@ -85,6 +85,7 @@ export const Wrapper = styled.div`
     font-weight: 300;
     letter-spacing: 2px;
     text-transform: uppercase;
+    overflow: hidden;
   }
 
   .card__time {

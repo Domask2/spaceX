@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
-
 import Layout from "../components/Layout/Layout";
 import { query } from "../Query/query";
 import { toDateFormat } from "./../Utils/index";
 import { ISpaces, ISpacesDocs } from "../type";
-
-import Spinner from "../components/Spinner/Spinner";
 
 const Home = ({
   initialSpaces,
@@ -128,11 +125,13 @@ const Home = ({
       setFetching(true);
     }
   };
-  console.log(totalDocs);
+
   return (
     <div>
       <Layout
         spaces={spaces}
+        fetching={fetching}
+        totalDocs={totalDocs}
         handleDataSeach={handleDataSeach}
         resetSeactDate={resetSeactDate}
         startDateSearch={startDateSearch}
@@ -140,10 +139,6 @@ const Home = ({
         setStartDateSearch={setStartDateSearch}
         setEndDateSearch={setEndDateSearch}
       />
-
-      {fetching && <div><Spinner/><div></div></div> }
-      {spaces?.length === totalDocs &&
-      <h3 className="page-end">Данные по запускам SpaceX больше нет</h3>}
     </div>
   );
 };
