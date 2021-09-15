@@ -1,6 +1,6 @@
 ## Тестовое задание: необходимо сделать интерфейс который будет показывать список всех запусков Space X
 
-https://space-x-drab.vercel.app/
+https://epic-mcclintock-3550ea.netlify.app
 
 ## Инструкция для запуска
 
